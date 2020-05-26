@@ -4,7 +4,6 @@ import { join } from "path";
 import { createWriteStream, unlink } from "fs";
 import { tmpdir } from "os";
 import { promisify } from "util";
-import { fixPathForAsarUnpack } from 'electron-util';
 
 const pUnlink = promisify(unlink);
 
@@ -16,7 +15,7 @@ export type ExifData = ReadonlyArray<Record<string, any>>;
 /**
  * Tooling constants.
  */
-const BIN_PATH = fixPathForAsarUnpack(join(__dirname, "../vendor/Image-ExifTool-11.84/exiftool"));
+const BIN_PATH = join(__dirname, "../vendor/Image-ExifTool-11.84/exiftool").replace('app.asar', 'app.asar.unpacked');
 const DELIMITER = "\n}]\n";
 
 /**
